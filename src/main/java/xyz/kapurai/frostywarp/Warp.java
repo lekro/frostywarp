@@ -1,6 +1,14 @@
 package xyz.kapurai.frostywarp;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.configuration.serialization.ConfigurationSerializable;
+import org.bukkit.entity.Player;
 
 public class Warp implements Cloneable, ConfigurationSerializable {
 
@@ -32,17 +40,17 @@ public class Warp implements Cloneable, ConfigurationSerializable {
     public static Warp deserialize(Map<String, Object> map) {
 
         // Specify default values in case of malformed object...
-        World world = Bukkit.getWorlds()[0];
-        double x = map.getOrDefault("x", 0.0);
-        double y = map.getOrDefault("y", 0.0);
-        double z = map.getOrDefault("z", 0.0);
-        double yaw = map.getOrDefault("yaw", 0.0);
-        double pitch = map.getOrDefault("pitch", 0.0);
-        String desc = map.getOrDefault("desc", null);
+        World world = Bukkit.getWorlds().get(0);
+        double x = (Double) map.getOrDefault("x", 0.0);
+        double y = (Double) map.getOrDefault("y", 0.0);
+        double z = (Double) map.getOrDefault("z", 0.0);
+        float yaw = (Float) map.getOrDefault("yaw", 0.0);
+        float pitch = (Float) map.getOrDefault("pitch", 0.0);
+        String desc = (String) map.getOrDefault("desc", null);
 
         if (map.containsKey("world")) {
             try {
-                UUID uuid = UUID.fromString(map.get("world"));
+                UUID uuid = UUID.fromString((String) map.get("world"));
                 world = Bukkit.getWorld(uuid);
             } catch (IllegalArgumentException e) {}
         }
