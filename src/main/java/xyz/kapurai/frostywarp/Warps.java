@@ -78,4 +78,8 @@ public final class Warps {
 
     }
 
+    public Map<String, Warp> getWarps() {
+        return warps;
+    }
+
 }
