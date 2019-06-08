@@ -8,8 +8,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
+import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.entity.Player;
 
+@SerializableAs("warp")
 public class Warp implements Cloneable, ConfigurationSerializable {
 
     private Location loc;
