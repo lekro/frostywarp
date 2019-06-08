@@ -24,6 +24,10 @@ public class Warp implements Cloneable, ConfigurationSerializable {
 
     }
 
+    public void setDescription(String description) {
+        desc = description;
+    }
+
     public Map<String, Object> serialize() {
 
         Map<String, Object> map = new HashMap<>();

@@ -1,9 +1,9 @@
 package xyz.kapurai.frostywarp.commands;
 
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.ChatColor;
 
 import java.util.Map;
 import java.util.List;
@@ -14,23 +14,17 @@ import xyz.kapurai.frostywarp.ChatUtils;
 import xyz.kapurai.frostywarp.Warps;
 import xyz.kapurai.frostywarp.Warp;
 
-public class WarpsCommand implements CommandExecutor {
-
-    private final Warps warps;
+public class WarpsCommand extends FrostyWarpCommand {
 
     public WarpsCommand(Warps warps) {
-        this.warps = warps;
+        super(warps);
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label,
                              String[] args) {
 
-        if (!(sender instanceof Player)) {
-            sender.sendMessage("you must be a player to execute this command");
-            return true;
-        }
-
+        if (!validatePlayer(sender)) return true;
         Player p = (Player) sender;
 
         // We can fit 9 warps on one page of lines...
@@ -39,7 +33,8 @@ public class WarpsCommand implements CommandExecutor {
             try {
                 page = Integer.parseInt(args[0]);
             } catch (NumberFormatException e) {
-                sender.sendMessage("page number must be a positive integer!");
+                sender.sendMessage(ChatColor.RED
+                        + "Page number must be a positive integer!");
                 return true;
             }
         }
