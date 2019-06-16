@@ -1,0 +1,45 @@
+author: lekro (kapurai)
+description: not-too-simple warp plugin for FC
+name: frostywarp
+main: xyz.kapurai.frostywarp.FrostyWarp
+version: 0.0.1
+depend: [ProtocolLib]
+website: https://github.com/lekro/frostywarp
+commands:
+    warp:
+        description: Use a warp.
+        permission: frostywarp.warp
+        usage: '/<command> <warp>'
+    setwarp:
+        description: Set a warp to your current location.
+        permission: frostywarp.setwarp
+        usage: '/<command> <warp> [description...]'
+    delwarp:
+        description: Delete a warp.
+        permission: frostywarp.delwarp
+        usage: '/<command> <warp>'
+    warps:
+        description: List available warps.
+        permission: frostywarp.warps
+        usage: '/<command> [page]'
+permissions:
+    frostywarp.warp:
+        description: Allows using warps.
+        default: false
+    frostywarp.setwarp:
+        description: Allows setting warps.
+        default: false
+    frostywarp.delwarp:
+        description: Allows deleting warps.
+        default: false
+    frostywarp.warps:
+        description: Allows listing warps.
+        default: false
+    frostywarp.*:
+        description: Allows everything relating to warps.
+        default: true
+        children:
+            - frostywarp.warp
+            - frostywarp.setwarp
+            - frostywarp.delwarp
+            - frostywarp.warps
