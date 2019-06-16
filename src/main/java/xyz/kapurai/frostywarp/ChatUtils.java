@@ -3,6 +3,8 @@ package xyz.kapurai.frostywarp;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.wrappers.WrappedChatComponent;
+import com.comphenix.protocol.wrappers.EnumWrappers;
 import org.bukkit.entity.Player;
 import java.lang.reflect.InvocationTargetException;
 
@@ -21,9 +23,12 @@ public final class ChatUtils {
      */
     public static void sendJSONMessage(Player p, String json) {
 
+        System.out.println(json);
         PacketContainer chatPacket = new PacketContainer(
                 PacketType.Play.Server.CHAT);
-        chatPacket.getStrings().write(0, json);
+        WrappedChatComponent comp = WrappedChatComponent.fromJson(json);
+        chatPacket.getChatComponents().write(0, comp);
+        chatPacket.getChatTypes().write(0, EnumWrappers.ChatType.SYSTEM);
 
         try {
             ProtocolLibrary.getProtocolManager()
@@ -79,9 +84,9 @@ public final class ChatUtils {
         if (hoverAction != null && hoverValue != null) {
             sb.append(",\"hoverEvent\":{\"action\":\"");
             sb.append(hoverAction);
-            sb.append("\",\"value\":\"");
+            sb.append("\",\"value\":");
             sb.append(hoverValue);
-            sb.append("\"}");
+            sb.append("}");
         }
 
         if (clickAction != null && clickValue != null) {
@@ -92,10 +97,10 @@ public final class ChatUtils {
             sb.append("\"}");
         }
 
-        if (extra != null) {
-            sb.append(",\"extra\":\"");
+        if (extra != null && extra.length() > 0) {
+            sb.append(",\"extra\":[");
             sb.append(extra);
-            sb.append('\"');
+            sb.append(']');
         }
 
         sb.append("}");

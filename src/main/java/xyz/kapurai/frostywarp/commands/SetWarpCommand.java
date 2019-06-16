@@ -23,8 +23,18 @@ public final class SetWarpCommand extends FrostyWarpCommand {
         if (args.length == 0) {
             return false;
         }
+        
+        StringBuilder sb = new StringBuilder();
+        if (args.length > 1) {
+            for (int i = 1; i < args.length; i++) {
+                if (i > 1) sb.append(' ');
+                sb.append(args[i]);
+            }
+        }
+        String desc = sb.toString();
 
-        warps.getWarps().put(args[0], new Warp(p.getLocation(), ""));
+
+        warps.getWarps().put(args[0], new Warp(p.getLocation(), desc));
 
         return true;
     }

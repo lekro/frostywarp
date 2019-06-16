@@ -28,6 +28,11 @@ public class Warp implements Cloneable, ConfigurationSerializable {
         desc = description;
     }
 
+    public String getDescription() {
+        return desc;
+    }
+
+
     public Map<String, Object> serialize() {
 
         Map<String, Object> map = new HashMap<>();
@@ -67,6 +72,19 @@ public class Warp implements Cloneable, ConfigurationSerializable {
 
     public void teleport(Player p) {
         p.teleport(loc);
+    }
+    
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("(X=");
+        sb.append((int) loc.getX());
+        sb.append(", Y=");
+        sb.append((int) loc.getY());
+        sb.append(", Z=");
+        sb.append((int) loc.getZ());
+        sb.append(") in ");
+        sb.append(loc.getWorld().getName());
+        return sb.toString();
     }
 
 }

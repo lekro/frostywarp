@@ -20,6 +20,23 @@ public class WarpsCommand extends FrostyWarpCommand {
         super(warps);
     }
 
+    private String formatWarp(Warp w) {
+        StringBuilder sb = new StringBuilder();
+        String desc = w.getDescription();
+        if (desc == null || desc.length() == 0) desc = "no description";
+        desc += "\\n";
+
+        sb.append(ChatUtils.getJSONString(desc, "gray", false, true,
+                    false, false, false, null, null, null, null, null));
+        sb.append(',');
+        sb.append(ChatUtils.getJSONString("(click to warp)", "gray", false,
+                    false, false, false, false, null, null, null, null, null));
+
+        return ChatUtils.getJSONString(w.toString()+"\\n", null, false, false,
+                false, false, false, null, null, null, null, sb.toString());
+    }
+
+
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label,
                              String[] args) {
@@ -31,7 +48,7 @@ public class WarpsCommand extends FrostyWarpCommand {
         int page = 0;
         if (args.length > 0) {
             try {
-                page = Integer.parseInt(args[0]);
+                page = Integer.parseInt(args[0]) - 1;
             } catch (NumberFormatException e) {
                 sender.sendMessage(ChatColor.RED
                         + "Page number must be a positive integer!");
@@ -46,24 +63,35 @@ public class WarpsCommand extends FrostyWarpCommand {
 
         StringBuilder sb = new StringBuilder();
         // Prev/next buttons
+        boolean first = true;
         if (page > 0) {
-            sb.append(ChatUtils.getJSONString("[prev]", "gray", false,
-                    false, false, false, false, null, null, "run_command",
+            first = false;
+            sb.append(ChatUtils.getJSONString("[<-]", "gray", false,
+                    false, false, false, false, "show_text",
+                    "\"go to page " + page+"\"", "run_command",
                     "/warps " + page, null));
         }
-        if (page < pages) {
-            sb.append(ChatUtils.getJSONString("[next]", null, false,
-                    false, false, false, false, null, null, "run_command",
+        if (page < pages-1) {
+            if (!first) {
+                sb.append(',');
+            }
+            sb.append(ChatUtils.getJSONString("[->]", "gray", false,
+                    false, false, false, false, "show_text",
+                    "\"go to page " + (page+2)+"\"", "run_command",
                     "/warps " + (page+2), null));
+            first = false;
         }
-
-        sb.append(ChatUtils.getJSONString("\n", null, false,
-                false, false, false, false, null, null, null, null, null));
 
         for (int i = page*9; i < page*9+9 && i < sortedKeys.size(); i++) {
             String key = sortedKeys.get(i);
-            sb.append(ChatUtils.getJSONString(key + '\n', null, false,
-                    false, false, false, false, null, null, "run_command",
+            Warp w = map.get(key);
+            if (!first) {
+                sb.append(',');
+            }
+            first = false;
+            sb.append(ChatUtils.getJSONString("\\n" + key, "gray", false,
+                    false, false, false, false, "show_text",
+                    formatWarp(w), "run_command",
                     "/warp " + key, null));
         }
 
