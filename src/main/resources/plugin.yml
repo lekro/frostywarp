@@ -5,6 +5,7 @@ main: xyz.kapurai.frostywarp.FrostyWarp
 version: 0.0.1
 depend: [ProtocolLib]
 website: https://github.com/lekro/frostywarp
+load: POSTWORLD
 commands:
     warp:
         description: Use a warp.

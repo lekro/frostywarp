@@ -34,7 +34,9 @@ public final class SetWarpCommand extends FrostyWarpCommand {
         String desc = sb.toString();
 
 
-        warps.getWarps().put(args[0], new Warp(p.getLocation(), desc));
+        if (warps.save(args[0], new Warp(p.getLocation(), desc))) {
+            sender.sendMessage("Created warp "+args[0]+".");
+        }
 
         return true;
     }

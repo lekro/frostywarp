@@ -12,15 +12,15 @@ public class FrostyWarp extends JavaPlugin {
     @Override
     public void onEnable() {
 
+        // Register our serializable class
+        ConfigurationSerialization.registerClass(Warp.class, "warp");
+
         // Prepare configuration to a usable state.
         saveDefaultConfig();
         getConfig().options().copyDefaults(true);
 
-        // Register our serializable class
-        ConfigurationSerialization.registerClass(Warp.class, "warp");
-
         // Get warps
-        warps = new Warps(getConfig().getConfigurationSection("warps"));
+        warps = new Warps(this, "warps");
 
         // Register commands.
         getCommand("warp").setExecutor(new WarpCommand(warps));

@@ -10,11 +10,17 @@ public final class Warps {
 
     // Cached warps loaded from the config
     private Map<String, Warp> warps;
+    private String confKey;
+    private final FrostyWarp plugin;
 
 
-    public Warps(ConfigurationSection conf) {
+    public Warps(FrostyWarp plugin, String confKey) {
 
+        this.plugin = plugin;
+        this.confKey = confKey;
         warps = new HashMap<>();
+        ConfigurationSection conf = plugin.getConfig()
+            .getConfigurationSection(confKey);
         load(conf, true);
 
     }
@@ -53,12 +59,19 @@ public final class Warps {
     public boolean save(ConfigurationSection conf, String key) {
 
         Warp warp = warps.getOrDefault(key, null);
-        if (warp != null) {
-            conf.set(key, warp);
-        }
+        conf.set(key, warp);
+        plugin.saveConfig();
 
         return warp != null;
 
+    }
+
+    public boolean save(String key, Warp w) {
+        ConfigurationSection conf = plugin.getConfig()
+            .getConfigurationSection(confKey);
+        if (w != null) warps.put(key, w);
+        else warps.remove(key);
+        return save(conf, key);
     }
 
 

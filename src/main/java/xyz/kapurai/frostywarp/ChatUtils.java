@@ -23,7 +23,7 @@ public final class ChatUtils {
      */
     public static void sendJSONMessage(Player p, String json) {
 
-        System.out.println(json);
+        // System.out.println(json);
         PacketContainer chatPacket = new PacketContainer(
                 PacketType.Play.Server.CHAT);
         WrappedChatComponent comp = WrappedChatComponent.fromJson(json);

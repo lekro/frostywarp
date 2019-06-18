@@ -19,7 +19,9 @@ public final class DelWarpCommand extends FrostyWarpCommand {
             return false;
         }
 
-        warps.getWarps().remove(args[0]);
+        if (!warps.save(args[0], null)) {
+            sender.sendMessage("Deleted warp "+args[0]+".");
+        }
         return true;
     }
 

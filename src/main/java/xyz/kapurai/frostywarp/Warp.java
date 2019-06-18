@@ -55,8 +55,8 @@ public class Warp implements Cloneable, ConfigurationSerializable {
         double x = (Double) map.getOrDefault("x", 0.0);
         double y = (Double) map.getOrDefault("y", 0.0);
         double z = (Double) map.getOrDefault("z", 0.0);
-        float yaw = (Float) map.getOrDefault("yaw", 0.0);
-        float pitch = (Float) map.getOrDefault("pitch", 0.0);
+        float yaw = ((Double) map.getOrDefault("yaw", 0.0)).floatValue();
+        float pitch = ((Double) map.getOrDefault("pitch", 0.0)).floatValue();
         String desc = (String) map.getOrDefault("desc", null);
 
         if (map.containsKey("world")) {
