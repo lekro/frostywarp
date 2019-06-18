@@ -21,3 +21,7 @@ somewhat tiny warp plugin for FC creative.
 ## Notes
 - All warps are immutable. To rename or redescribe warps, simply use the
   creation/deletion operations.
+
+## Building
+- Get a JDK and Maven.
+- `mvn package` should probably put the jar in `target/frostywarp.jar`.
