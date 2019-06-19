@@ -91,7 +91,7 @@ public class Warp implements Cloneable, ConfigurationSerializable {
     }
 
     public boolean inWorld(World world) {
-        return worldId == world.getUID();
+        return worldId.equals(world.getUID());
     }
 
     /**
@@ -110,7 +110,7 @@ public class Warp implements Cloneable, ConfigurationSerializable {
         String format = "(X=%1$d, Y=%2$d, Z=%3$d) in %4$s";
         World world = getWorld();
         String worldName = (inWorld(world)) ? world.getName() : "[unknown]";
-        return String.format(format, x, y, z, worldName);
+        return String.format(format, (int) x, (int) y, (int) z, worldName);
     }
 
     public boolean equals(Object obj) {
