@@ -57,7 +57,6 @@ public class FancyMessage {
     public void sendTo(Player p) {
 
         String json = toString();
-        System.out.println(json);
 
         PacketContainer chatPacket = new PacketContainer(
                 PacketType.Play.Server.CHAT);

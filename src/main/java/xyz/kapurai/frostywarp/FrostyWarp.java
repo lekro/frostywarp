@@ -24,9 +24,13 @@ public class FrostyWarp extends JavaPlugin {
 
         // Register commands.
         getCommand("warp").setExecutor(new WarpCommand(warps));
+        getCommand("warp").setTabCompleter(new WarpTabCompleter(warps));
         getCommand("setwarp").setExecutor(new SetWarpCommand(warps));
+        getCommand("setwarp").setTabCompleter(new NullTabCompleter());
         getCommand("delwarp").setExecutor(new DelWarpCommand(warps));
+        getCommand("delwarp").setTabCompleter(new WarpTabCompleter(warps));
         getCommand("warps").setExecutor(new WarpsCommand(warps));
+        getCommand("warps").setTabCompleter(new NullTabCompleter());
 
     }
 
