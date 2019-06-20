@@ -1,5 +1,5 @@
 # frostywarp
-somewhat tiny warp plugin for FC creative.
+somewhat tiny warp plugin for FC creative. (Bukkit 1.12)
 
 ## Features
 - Fast, I think
@@ -21,6 +21,10 @@ somewhat tiny warp plugin for FC creative.
 ## Notes
 - All warps are immutable. To rename or redescribe warps, simply use the
   creation/deletion operations.
+
+## Install
+- You need Craftbukkit (1.12, but maybe others will work) and ProtocolLib.
+- Then just put the jar from github releases into your plugins directory.
 
 ## Building
 - Get a JDK and Maven.
