@@ -3,7 +3,7 @@
 
     <groupId>xyz.kapurai</groupId>
     <artifactId>frostywarp</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.3</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -49,6 +49,7 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
+                <filtering>true</filtering>
             </resource>
         </resources>
 

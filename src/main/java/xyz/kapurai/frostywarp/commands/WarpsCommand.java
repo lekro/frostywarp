@@ -105,7 +105,6 @@ public class WarpsCommand extends FrostyWarpCommand {
 
             m = new FancyMessage('\n' + key);
             m.color = Color.GRAY;
-            m.italic = true;
             m.hoverEvent = new HoverAction(HoverAction.Type.SHOW_TEXT,
                                           formatWarp(w));
             m.clickEvent = new ClickAction(ClickAction.Type.RUN_COMMAND,
