@@ -62,9 +62,18 @@ public class WarpsCommand extends FrostyWarpCommand {
         }
 
         Map<String, Warp> map = warps.getWarps();
+        int pages = (map.size() - 1) / 9 + 1;
+
+        if (page < 0 || page >= pages) {
+            String pageErrorMessage = String.format(
+                    "Invalid page number. Only pages 1-%1$s exist.",
+                    pages);
+            sender.sendMessage(ChatColor.RED + pageErrorMessage);
+            return true;
+        }
+
         List<String> sortedKeys = new ArrayList<>(map.keySet());
         Collections.sort(sortedKeys);
-        int pages = (map.size() - 1) / 9 + 1;
 
         String heading = String.format("Warps (%1$d/%2$d) ", page+1, pages);
         FancyMessage outer = new FancyMessage(heading);
