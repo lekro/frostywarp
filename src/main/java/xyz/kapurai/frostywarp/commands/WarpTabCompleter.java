@@ -2,6 +2,7 @@ package xyz.kapurai.frostywarp.commands;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,12 +28,10 @@ public class WarpTabCompleter implements TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command,
                                       String alias, String[] args) {
         if (args.length <= 1) {
-            List<String> sortedKeys = warps.getWarps().keySet().stream()
-                .filter(k -> k.startsWith(args[0]))
-                .sorted()
+            return warps.getWarps().keySet().stream()
+                .filter(k -> k.toLowerCase().startsWith(args[0].toLowerCase()))
+                .sorted(Comparator.comparing(k -> k.toLowerCase()))
                 .collect(Collectors.toList());
-
-            return sortedKeys;
         } else {
             return empty;
         }
