@@ -3,8 +3,7 @@ package xyz.kapurai.frostywarp.commands;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -28,9 +27,10 @@ public class WarpTabCompleter implements TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command,
                                       String alias, String[] args) {
         if (args.length <= 1) {
-            Map<String, Warp> map = warps.getWarps();
-            List<String> sortedKeys = new LinkedList<>(map.keySet());
-            Collections.sort(sortedKeys);
+            List<String> sortedKeys = warps.getWarps().keySet().stream()
+                .filter(k -> k.startsWith(args[0]))
+                .sorted()
+                .collect(Collectors.toList());
 
             return sortedKeys;
         } else {
