@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 import xyz.kapurai.frostywarp.Warp;
 import xyz.kapurai.frostywarp.Warps;
@@ -93,7 +94,8 @@ public class WarpsCommand extends FrostyWarpCommand {
         }
 
         List<String> sortedKeys = new ArrayList<>(map.keySet());
-        Collections.sort(sortedKeys);
+        Collections.sort(sortedKeys,
+                         Comparator.comparing(k -> k.toLowerCase()));
 
         String heading = String.format("Warps (%1$d/%2$d) ", page+1, pages);
         FancyMessage outer = new FancyMessage(heading);
